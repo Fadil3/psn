@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import PageWrapper from "@/components/PageWrapper";
+import Button from "@/components/Button";
 
 export default function Login() {
   const router = useRouter();
 
   const [data, setData] = useState({
-    email: '',
+    username: '',
     password: ''
   });
   const [submitted, setSubmitted] = useState(false);
 
   const validateForm = () => {
-    if (data.email === '' || data.password === '') {
+    if (data.username === '' || data.password === '') {
       return false;
     }
     return true;
@@ -37,16 +38,16 @@ export default function Login() {
           <h1 className="text-2xl font-bold mb-4 text-center">Login Page</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="email" className="block">Email</label>
-              <input type="email" name="email" id="email" className="border px-4 py-2 w-full" onChange={handleChange} />
-              {submitted && data.email === '' && <p className="text-red-500">Email is required</p>}
+              <label htmlFor="username" className="block">username</label>
+              <input name="username" id="username" className="border px-4 py-2 w-full" onChange={handleChange} />
+              {submitted && data.username === '' && <p className="text-red-500">username is required</p>}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="block">Password</label>
               <input type="password" name="password" id="password" className="border px-4 py-2 w-full" onChange={handleChange} />
               {submitted && data.password === '' && <p className="text-red-500">Password is required</p>}
             </div>
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">Login</button>
+            <Button classnames="w-full">Login</Button>
           </form>
         </div>
       </div>

@@ -1,5 +1,6 @@
-import { Comment } from "@/types/comment";
+import Button from "@/components/Button";
 import PageWrapper from "@/components/PageWrapper";
+import { Comment } from "@/types/comment";
 import { DataTable, DataTableRowData } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useState } from "react";
@@ -7,12 +8,6 @@ import { useRouter } from "next/router";
 
 interface DashboardProps {
   data: Comment[];
-}
-
-interface ButtonProps {
-  children: React.ReactNode;
-  color?: string;
-  onClick?: () => void;
 }
 
 export default function Dashboard({ data }: DashboardProps) {
@@ -40,12 +35,6 @@ export default function Dashboard({ data }: DashboardProps) {
     </div>
   );
 
-  const Button = ({ children, color = "bg-blue-500", onClick }: ButtonProps) => {
-    return (
-      <button className={`${color} text-white px-4 py-2 rounded`} onClick={onClick}>{children}</button>
-    );
-  };
-
   const DeleteModal = () => {
     return (
       <div className="fixed z-[10] inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -69,9 +58,10 @@ export default function Dashboard({ data }: DashboardProps) {
 
     try {
       const id = selectedComment.id;
-      const newData = data.filter((comment) => comment.id !== id);
+      const newData = comments.filter((comment) => comment.id !== id);
       setComments(newData);
       setShowDeleteModal(false);
+      setSelectedComment(null);
     } catch (error) {
       console.error(error);
     }
